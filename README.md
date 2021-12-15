@@ -2,9 +2,9 @@
 
 This project is being made in our college Technical Fest "Avishkar" of MNNIT Allahabad 
 We are a group of three students working on this project , 
-           Markup :       * Yash Khandelwal ,
-                          * Satya Prakash Satyam ,
-                          * Ayushman Singh . 
+            Yash Khandelwal ,
+            Satya Prakash Satyam    
+            Ayushman Singh . 
 
 This project helps the student in registering and booking vaccination slots to get themselves vaccinated and help our country fight against COVID. 
 
