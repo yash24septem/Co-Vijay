@@ -1,14 +1,14 @@
 # Co-Vijay
 
-This project is being made in our college Technical Fest "Avishkar" of MNNIT Allahabad \n
+This project is being made in our college Technical Fest "Avishkar" of MNNIT Allahabad 
 We are a group of three students working on this project , 
-                   Yash Khandelwal ,
-                   Satya Prakash Satyam ,
-                   Ayushman Singh .
+                 *Yash Khandelwal ,
+                 *Satya Prakash Satyam ,
+                 *Ayushman Singh . 
 
 This project helps the student in registering and booking vaccination slots to get themselves vaccinated and help our country fight against COVID. 
 
-This project will be made using Java EE and frameworks Spring/Spring Boot.  
+This project will be made using Javafx and using relational database such as MySQL.  
 
 The features that we have planned to include in the project are : 
                 1. Separate login for government officials and people.
