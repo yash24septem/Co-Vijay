@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:controller="com.example.covijay.SignUpController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bfe6ff;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-1.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@vaccine.png" />
+               </image></ImageView>
+            <Label layoutX="48.0" layoutY="261.0" text="Co-Vijay">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="405.0">
+         <children>
+            <Label layoutX="31.0" layoutY="28.0" text="Username">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="66.0" text="Phone No.">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="101.0" text="Password">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_username" layoutX="176.0" layoutY="35.0" prefHeight="28.0" prefWidth="149.0" />
+            <TextField fx:id="tf_phone" layoutX="176.0" layoutY="70.0" prefHeight="28.0" prefWidth="149.0" />
+            <TextField fx:id="tf_password" layoutX="176.0" layoutY="105.0" prefHeight="28.0" prefWidth="149.0" />
+            <Label layoutX="31.0" layoutY="133.0" text="Email">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_email" layoutX="176.0" layoutY="137.0" prefHeight="28.0" prefWidth="200.0" />
+            <Button fx:id="button_signup" layoutX="133.0" layoutY="244.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #26abff;" text="Sign Up">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="47.0" layoutY="323.0" text="Alredy a member?">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="button_login" layoutX="219.0" layoutY="317.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Login" textFill="#1b76c5" underline="true">
+               <font>
+                  <Font name="Arial Black" size="17.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</HBox>
