@@ -14,6 +14,10 @@ public class LoggedInController implements Initializable {
     @FXML
     private Button button_logout;
     @FXML
+    private Button button_document;
+    @FXML
+    private Button button_book;
+    @FXML
     private Label label_welcome;
     @FXML
     private Label label_phone;
@@ -23,6 +27,19 @@ public class LoggedInController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event,"hello-view.fxml","Login!",null,null,null);
+
+            }
+        });
+        button_document.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event,"updateDocuments.fxml","Update Documents!",null,null,null);
+            }
+        });
+        button_book.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event,"bookSlot.fxml","Book Slot!",null,null,null);
 
             }
         });
