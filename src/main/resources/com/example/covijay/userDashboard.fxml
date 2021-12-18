@@ -24,7 +24,7 @@
       </Button>
       <ImageView fitHeight="56.0" fitWidth="57.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@dp.png" />
+            <Image url="@../../../Public/dp.png" />
          </image></ImageView>
       <Button fx:id="button_logout11" layoutX="14.0" layoutY="343.0" mnemonicParsing="false" style="-fx-background-color: #26abff;" text="Your vaccination status">
          <font>

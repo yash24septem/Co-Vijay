@@ -17,8 +17,7 @@ public class BookSlotController implements Initializable {
         button_cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event,"logged-in.fxml","Welcome!!",null,null,null);
-
+                DBUtils.changeScene(event,"userDashboard.fxml","Welcome!!",null,null,null);
             }
         });
 
