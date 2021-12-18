@@ -48,7 +48,7 @@ public class DBUtils {
         ResultSet resultSet=null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","satya");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
             psCheckUserExists=connection.prepareStatement("SELECT * FROM users where username=?");
             psCheckUserExists.setString(1,username);
             resultSet=psCheckUserExists.executeQuery();
@@ -129,7 +129,7 @@ public class DBUtils {
         }
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","satya");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
             preparedStatement=connection.prepareStatement("SELECT adhaar FROM users where email=?");
             preparedStatement.setString(1,email);
             resultSet=preparedStatement.executeQuery();
