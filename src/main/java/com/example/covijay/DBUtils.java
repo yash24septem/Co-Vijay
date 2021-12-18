@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class DBUtils {
     public static void changeScene(ActionEvent event,String fxmlFile,String title,String username,String phone,String email){
@@ -17,8 +18,8 @@ public class DBUtils {
             try{
                 FXMLLoader loader=new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root=loader.load();
-                LoggedInController loggedInController=loader.getController();
-                loggedInController.setUserInformation(username,phone);
+                UserDashboardController userDashboardController =loader.getController();
+                userDashboardController.setUserInformation(username,phone);
             }
             catch(IOException e){
                 e.printStackTrace();
@@ -47,7 +48,7 @@ public class DBUtils {
         ResultSet resultSet=null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","satya");
             psCheckUserExists=connection.prepareStatement("SELECT * FROM users where username=?");
             psCheckUserExists.setString(1,username);
             resultSet=psCheckUserExists.executeQuery();
@@ -66,7 +67,7 @@ public class DBUtils {
                 psInsert.setString(4,email);
                 psInsert.executeUpdate();
 
-                changeScene(event,"logged-in.fxml","Welcome!",username,phone,email);
+                changeScene(event,"userDashboard.fxml","Welcome!",username,phone,email);
             }
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -109,38 +110,38 @@ public class DBUtils {
 
         }
     }
-    public static void logInUser(ActionEvent event,String username,String password){
+
+
+    //Login of user via otp
+    private static String otp = "";
+    public static void logInUser(ActionEvent event,String email,String adhaar, String otpUser){
         Connection connection=null;
         PreparedStatement preparedStatement=null;
+        PreparedStatement psInsert=null;
         ResultSet resultSet=null;
+        System.out.println(otpUser);
+        if(!otp.equals(otpUser)){
+
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Entered otp is wrong");
+            alert.show();
+            return;
+        }
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
-            preparedStatement=connection.prepareStatement("SELECT password,phone,email FROM users where username=?");
-            preparedStatement.setString(1,username);
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","satya");
+            preparedStatement=connection.prepareStatement("SELECT adhaar FROM users where email=?");
+            preparedStatement.setString(1,email);
             resultSet=preparedStatement.executeQuery();
-            if(resultSet.isBeforeFirst()){
-                System.out.println("User not found");
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Provided credentials are incorrect");
-                alert.show();
+            if(!resultSet.next()){
+                psInsert=connection.prepareStatement("INSERT INTO users (email,adhaar) VALUES(?,?)");
+                psInsert.setString(1,email);
+                psInsert.setString(2,adhaar);
+                psInsert.executeUpdate();
+                System.out.println("Entry added");
             }
-            else{
-                while(resultSet.next()){
-                    String retrievedPassword=resultSet.getString("password");
-                    String retrievedPhone=resultSet.getString("phone");
-                    String retrievedemail=resultSet.getString("email");
-                    if(retrievedPassword.equals(password)){
-                        changeScene(event,"logged-in.fxml","Welcome!",username,retrievedPhone,retrievedemail);
-                    }
-                    else {
-                        System.out.println("password not matched!");
-                        Alert alert=new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Provided credentials are incorrect");
-                        alert.show();
-                    }
-                }
-            }
+            System.out.println("logged in");
+            changeScene(event,"userDashboard.fxml","Welcome!",null,null,email);
 
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -173,6 +174,23 @@ public class DBUtils {
             }
         }
 
+    }
+
+    private static String generate(int len) {
+            String numbers = "0123456789";
+            Random rndm_method = new Random();
+            char[] otp = new char[len];
+            for (int i = 0; i < len; i++)
+            {
+                otp[i] = numbers.charAt(rndm_method.nextInt(numbers.length()));
+            }
+            return String.valueOf(otp);
+    }
+
+    public static boolean sendOtp(String email){
+        otp = generate(4);
+        SendEmail sendEmail = new SendEmail(email, otp);
+        return sendEmail.sendMail();
     }
 
 
