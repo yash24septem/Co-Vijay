@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,7 +26,6 @@ public class UserDashboardController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event,"homePage.fxml","Login!",null,null,null);
-
             }
         });
         button_document.setOnAction(new EventHandler<ActionEvent>() {
@@ -40,17 +38,11 @@ public class UserDashboardController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event,"bookSlot.fxml","Book Slot!",null,null,null);
-
             }
         });
-
     }
     public void setUserInformation(String username,String phone){
         label_welcome.setText("Welcome"+username+"!");
         label_phone.setText(phone+" vaccinated!");
     }
-
-
-
-
 }
