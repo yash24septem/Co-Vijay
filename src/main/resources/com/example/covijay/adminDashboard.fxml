@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="504.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covijay.AdminDashboardController">
+   <children>
+      <Button fx:id="logout_admin_dashboard" layoutX="462.0" layoutY="14.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="114.0" text="LOGOUT" />
+      <Text layoutX="33.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Admin" wrappingWidth="196.6708984375">
+         <font>
+            <Font name="Bernard MT Condensed" size="30.0" />
+         </font>
+      </Text>
+      <Text layoutX="33.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beneficiaries Vaccinatied with Dose 1 " wrappingWidth="276.6708984375" />
+      <Text layoutX="33.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beneficiaries Vaccinatied with Dose 2" />
+   </children>
+</AnchorPane>

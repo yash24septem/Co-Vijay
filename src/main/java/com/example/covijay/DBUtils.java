@@ -23,7 +23,6 @@ public class DBUtils {
             }
             catch(IOException e){
                 e.printStackTrace();
-
             }
         }
         else{
@@ -32,42 +31,59 @@ public class DBUtils {
             }
             catch(IOException e){
                 e.printStackTrace();
-
             }
         }
-
+        // staging window me dikhne ke liye
         Stage stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.setScene(new Scene(root,600,400));
         stage.show();
     }
-    public static void signUpUser(ActionEvent event,String username,String password,String phone,String email){
+    public static void signUpUser(ActionEvent event,String password,String email){
         Connection connection=null;
         PreparedStatement psInsert=null;
         PreparedStatement psCheckUserExists=null;
+        PreparedStatement psCheckUserExistsPassword=null;
         ResultSet resultSet=null;
+        ResultSet resultSetPassword=null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
-            psCheckUserExists=connection.prepareStatement("SELECT * FROM users where username=?");
-            psCheckUserExists.setString(1,username);
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","rootpassword");
+            // query ban gaya
+            psCheckUserExists=connection.prepareStatement("SELECT password FROM admin where email=?");
+            psCheckUserExists.setString(1,email);
             resultSet=psCheckUserExists.executeQuery();
-            if(resultSet.isBeforeFirst()){
-                System.out.println("User already exists!");
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You cannot use this username.");
-                alert.show();
-
+            String pass="";
+            while(resultSet.next())
+            {
+               pass= resultSet.getString("password");
+               break;
             }
-            else{
-                psInsert=connection.prepareStatement("INSERT INTO users (username,password,phone,email) VALUES(?,?,?,?)");
-                psInsert.setString(1,username);
-                psInsert.setString(2,password);
-                psInsert.setString(3,phone);
-                psInsert.setString(4,email);
-                psInsert.executeUpdate();
+             if(pass.equalsIgnoreCase(password)) {
 
-                changeScene(event,"userDashboard.fxml","Welcome!",username,phone,email);
+                 Parent root=null;
+                 try{
+                     FXMLLoader loader=new FXMLLoader(HomePageController.class.getResource("adminDashboard.fxml"));
+                     root=loader.load();
+                     AdminDashboardController adminDashboardController =loader.getController();
+
+                 }
+                 catch(IOException e){
+                     e.printStackTrace();
+
+                 }
+                 Stage stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
+                 stage.setTitle("Welcome Admin");
+                 stage.setScene(new Scene(root,600,400));
+                 stage.show();
+
+             }
+             else
+            {
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Entered Data is wrong");
+                alert.show();
+                return;
             }
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -105,13 +121,8 @@ public class DBUtils {
                     e.printStackTrace();
                 }
             }
-
-
-
         }
     }
-
-
     //Login of user via otp
     private static String otp = "";
     public static void logInUser(ActionEvent event,String email,String adhaar, String otpUser){
@@ -121,7 +132,6 @@ public class DBUtils {
         ResultSet resultSet=null;
         System.out.println(otpUser);
         if(!otp.equals(otpUser)){
-
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Entered otp is wrong");
             alert.show();
@@ -129,7 +139,7 @@ public class DBUtils {
         }
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","root");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/co-vijay","root","rootpassword");
             preparedStatement=connection.prepareStatement("SELECT adhaar FROM users where email=?");
             preparedStatement.setString(1,email);
             resultSet=preparedStatement.executeQuery();
@@ -145,7 +155,6 @@ public class DBUtils {
 
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
-
         }
         finally {
             if(resultSet!=null){
